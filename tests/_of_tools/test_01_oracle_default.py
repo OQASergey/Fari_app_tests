@@ -80,6 +80,91 @@ def test_default_active():
                     color_no_act(l,r)
     browser.get(query.screenshot_saved(f'{link}01_test_default_active.png'))
 
+def test_titles():
+    browser.element('[data-cy="oracle.value"]').should(have.text('ДА, НО...'))
+    browser.element('[data-cy="oracle.value"]').should(have.attribute(
+        'data-cy-value','YesBut'))
+    browser.all('[class*="css-cespi2"]')[0].should(have.text('LIKELINESS'))
+    browser.all('[class*="css-cespi2"]')[1].should(have.text('ROLL'))
+    browser.element('[data-cy="oracle.likeliness.4"]>p').should(have.text(
+        'ALMOST GUARANTEED (+4)'))
+    browser.element('[data-cy="oracle.likeliness.3"]>p').should(have.text(
+        'VERY LIKELY (+3)'))
+    browser.element('[data-cy="oracle.likeliness.2"]>p').should(have.text(
+        'LIKELY (+2)'))
+    browser.element('[data-cy="oracle.likeliness.1"]>p').should(have.text(
+        'POSSIBLE (+1)'))
+    browser.element('[data-cy="oracle.likeliness.0"]>p').should(have.text(
+        '50/50 (0)'))
+    browser.element('[data-cy="oracle.likeliness.-1"]>p').should(have.text(
+        'IMPROBABLE (-1)'))
+    browser.element('[data-cy="oracle.likeliness.-2"]>p').should(have.text(
+        'UNLIKELY (-2)'))
+    browser.element('[data-cy="oracle.likeliness.-3"]>p').should(have.text(
+        'VERY UNLIKELY (-3)'))
+    browser.element('[data-cy="oracle.likeliness.-4"]>p').should(have.text(
+        'FAR FETCHED (-4)'))
+
+def p_numbers(a,b,c):
+    browser.all('[class="MuiTableBody-root css-1xnox0e"]>tr')[a].all(
+        '[class="MuiTableRow-root css-o38khb"]>td')[b].should(have.text(f'+{c}'))
+def m_numbers(a,b,c):
+    browser.all('[class="MuiTableBody-root css-1xnox0e"]>tr')[a].all(
+        '[class="MuiTableRow-root css-o38khb"]>td')[b].should(have.text(f'-{c}'))
+def test_numbers():
+    #Проверка записи положительных результатов
+    r = 2
+    n = 1
+    while r != 10:
+        p_numbers(0,r,n)
+        print(f'r={r}, n=+{n}')
+        r+=1
+        n+=1
+    r = 3
+    n = 1
+    while r != 10:
+        p_numbers(1,r,n)
+        print(f'r={r}, n=+{n}')
+        r+=1
+        n+=1
+    r = 4
+    n = 1
+    while r != 10:
+        p_numbers(2,r,n)
+        print(f'r={r}, n=+{n}')
+        r+=1
+        n+=1
+    r = 5
+    n = 1
+    while r != 10:
+        p_numbers(3,r,n)
+        print(f'r={r}, n=+{n}')
+        r+=1
+        n+=1
+    r = 6
+    n = 1
+    while r != 10:
+        p_numbers(4,r,n)
+        print(f'r={r}, n=+{n}')
+        r+=1
+        n+=1
+    r = 7
+    n = 1
+    while r != 10:
+        p_numbers(5,r,n)
+        print(f'r={r}, n=+{n}')
+        r+=1
+        n+=1
+    r = 8
+    n = 1
+    while r != 10:
+        p_numbers(6,r,n)
+        print(f'r={r}, n=+{n}')
+        r+=1
+        n+=1
+    p_numbers(7,9,1)
+    #Проверка записи отрицательных результатов
+
 def test_plus4_liken():
     browser.all('[class="MuiTableBody-root css-1xnox0e"]>tr')[0].all(
         '[class="MuiTableRow-root css-o38khb"]>td')[0].should(be.clickable)
